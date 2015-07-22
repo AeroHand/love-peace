@@ -10,8 +10,16 @@ function love.draw()--逐帧绘制
     if curstate=="menu" then
       drawmenu()   
     else
-      if curstate=="game" then
-        drawgame()
+      if curstate=="game_new" then
+        drawgamenew()
+      else
+        if curstate=="game_load" then
+          drawgameload()
+        else
+          if curstate=="game" then
+            drawgame()
+          end  
+        end    
       end 
     end  
 end
@@ -21,7 +29,5 @@ function love.update(dt)--游戏主逻辑
 end
 
 function love.keypressed(key)--按键响应
-    if curstate=="menu" then
-       menucheck(key)
-    end        
+    menucheck(key)       
 end
