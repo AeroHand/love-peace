@@ -12,13 +12,23 @@ function drawUI()  --绘制游戏内UI入口
     --绘制内脏状态栏
 
     --绘制左下角数字快捷键栏
+    local abilityUI=love.graphics.newImage("assets/UI/skill.png")
+    local ww=love.window.getWidth()
+    local wh=love.window.getHeight()
     
-    
+    for i=1,5 do
+      love.graphics.draw(abilityUI, (i-1)*60-60, wh-107, 0, 0.5, 0.5, 5, 5, 0, 0)  --need to rescale in the future to make this part robust
+    end 
+
+
     --绘制左下角主动攻击栏
+    love.graphics.draw(abilityUI, -122, wh-270, 0, 1, 1, 5, 5, 0, 0)  --need to rescale in the future to make this part robust
 
     --绘制右下角UI按钮栏
 
     --绘制右上角小地图
+    local minimapUI=love.graphics.newImage("assets/UI/minimap.png")
+    love.graphics.draw(minimapUI, ww/3*2-30, -40, 0, 0.5, 0.5, 5, 5, 0, 0)  --need to rescale in the future to make this part robust
 
 end	
 

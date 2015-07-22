@@ -75,6 +75,7 @@ function menucheck(key)
         
         if key=="return" or key==" " then
             if menupointer==1 then
+                --alreadyentername=0
                 curstate="game_new"
             end
             if menupointer==2 then
@@ -103,6 +104,9 @@ function menucheck(key)
             end
 
             if key=="return" or key==" " then
+                --if menunewpointer==1 and alreadyentername==0 then
+                --    curstate="game"
+                --end
                 if menunewpointer==1 then
                     curstate="game"
                 end

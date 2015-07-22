@@ -1,13 +1,16 @@
 主全局变量名用途：
 
 curstate: 表示现在的游戏状态
-		  分为 menu    初始菜单
-		       game    游戏中
-		       setting 设置菜单
-               bagUI   背包菜单
-               ability 技能树菜单
-               sandbox 人物内脏菜单
+		  分为 menu       初始菜单
+		       game_new   新游戏
+		       game_load  载入游戏
+		       game       游戏中
+		       setting	  设置菜单
+               bagUI  	  背包菜单
+               ability 	  技能树菜单
+               sandbox 	  人物内脏菜单
 
            等不同状态
 
 menupointer: 表示现在指向的初始菜单菜单栏
+menunewpointer：表示现在指向的新游戏的选人菜单
