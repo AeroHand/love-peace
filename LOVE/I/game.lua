@@ -1,5 +1,12 @@
 function drawworld()--绘制世界
-    
+    love.graphics.setColor(255, 255, 255)
+    local tiletexture=love.graphics.newImage("assets/texture/texture_meat.png")
+
+    for i=1,15 do
+       for j=1,15 do
+        love.graphics.draw(tiletexture, (i-1)*300, (j-1)*300, 0, 1, 1, 5, 5, 0, 0)  --need to rescale in the future to make this part robust
+       end
+    end 
 end
 
 function drawI()   --绘制主人公avatar
@@ -10,7 +17,7 @@ end
 
 function drawUI()  --绘制游戏内UI入口
     --绘制内脏状态栏
-
+    love.graphics.setColor(255, 255, 255)
     --绘制左下角数字快捷键栏
     local abilityUI=love.graphics.newImage("assets/UI/skill.png")
     local ww=love.window.getWidth()
@@ -28,8 +35,9 @@ function drawUI()  --绘制游戏内UI入口
 
     --绘制右上角小地图
     local minimapUI=love.graphics.newImage("assets/UI/minimap.png")
+    love.graphics.rectangle("fill", ww/3*2+65, 12, 195, 170)
     love.graphics.draw(minimapUI, ww/3*2-30, -40, 0, 0.5, 0.5, 5, 5, 0, 0)  --need to rescale in the future to make this part robust
-
+    
 end	
 
 
