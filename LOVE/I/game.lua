@@ -35,7 +35,7 @@ function drawUI()  --绘制游戏内UI入口
 
     --绘制右上角小地图
     local minimapUI=love.graphics.newImage("assets/UI/minimap.png")
-    love.graphics.rectangle("fill", ww/3*2+65, 12, 195, 170)
+    love.graphics.rectangle("fill", ww/3*2+65, 12, 195, 170) --绘制小地图的部分
     love.graphics.draw(minimapUI, ww/3*2-30, -40, 0, 0.5, 0.5, 5, 5, 0, 0)  --need to rescale in the future to make this part robust
     
 end	
