@@ -58,6 +58,10 @@ function drawgamenew()
     love.graphics.rectangle("line", 500, 100, 200, 460)
     love.graphics.print("Under Construction",520,140)
 
+    if alreadyentername==1 then
+       love.graphics.printf(textshow, 360,150)
+    end    
+
 end
 
 function drawgameload()
@@ -75,7 +79,7 @@ function menucheck(key)
         
         if key=="return" or key==" " then
             if menupointer==1 then
-                --alreadyentername=0
+                alreadyentername=0
                 curstate="game_new"
             end
             if menupointer==2 then
@@ -85,7 +89,7 @@ function menucheck(key)
                 curstate="setting"
             end
             if menupointer==4 then
-                return 0
+                love.quit()
             end    
         end
         if menupointer<1 then
@@ -104,10 +108,11 @@ function menucheck(key)
             end
 
             if key=="return" or key==" " then
-                --if menunewpointer==1 and alreadyentername==0 then
-                --    curstate="game"
-                --end
-                if menunewpointer==1 then
+                if menunewpointer==1 and alreadyentername==0 then
+                    
+                    alreadyentername=1
+                end
+                if menunewpointer==1 and alreadyentername==1 then
                     curstate="game"
                 end
                 if menunewpointer==2 then
@@ -124,3 +129,7 @@ function menucheck(key)
         end
     end        
 end	
+
+function love.textinput(t)
+    textshow = textshow .. t
+end
