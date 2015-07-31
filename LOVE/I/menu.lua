@@ -58,8 +58,10 @@ function drawgamenew()
     love.graphics.rectangle("line", 500, 100, 200, 460)
     love.graphics.print("Under Construction",520,140)
 
-    if alreadyentername==1 then
-       love.graphics.printf(textshow, 360,150)
+    if draw_textinput_in_new==1 then
+       love.graphics.rectangle("fill", 50, 200, 300, 100)
+       love.graphics.setColor(123, 244, 223) 
+       love.graphics.print(text,100,240)
     end    
 
 end
@@ -109,8 +111,11 @@ function menucheck(key)
 
             if key=="return" or key==" " then
                 if menunewpointer==1 and alreadyentername==0 then
+                    draw_textinput_in_new=1
                     
-                    alreadyentername=1
+                    text="Enter your name:"
+                    love.keyboard.setKeyRepeat(true)
+
                 end
                 if menunewpointer==1 and alreadyentername==1 then
                     curstate="game"
@@ -130,6 +135,24 @@ function menucheck(key)
     end        
 end	
 
+function love.keypressed(key)
+    if key == "backspace" then
+        -- get the byte offset to the last UTF-8 character in the string.
+        local byteoffset = utf8.offset(text, -1)
+ 
+        if byteoffset then
+            -- remove the last UTF-8 character.
+            -- string.sub operates on bytes rather than UTF-8 characters, so we couldn't do string.sub(text, 1, -2).
+            text = string.sub(text, 1, byteoffset - 1)
+        end
+    else
+        if not(key=="return" or key ==" ")   then 
+            alreadyentername=1
+        end    
+    end
+end
+
 function love.textinput(t)
-    textshow = textshow .. t
+    text = text .. t
+    alreadyentername=1
 end
