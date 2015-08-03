@@ -7,6 +7,8 @@ function initeverything()
   love.keyboard.setKeyRepeat(true)
   utf8 = require("utf8")
   filetoload={}
-  dxworld=0
-  dyworld=0
+  dxworld=100
+  dyworld=100
+  mainchar={}
+  maincharfps=1
 end	

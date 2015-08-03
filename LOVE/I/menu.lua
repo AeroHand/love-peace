@@ -138,7 +138,7 @@ function menucheck(key)
                 end
                 if menunewpointer==1 and alreadyentername==1 then
                     newfile()
-                    love.keyboard.setKeyRepeat(true)
+                    preloadimage("assets/monsters/slum/",24,mainchar)
                     curstate="game"
                 end
                 if menunewpointer==2 then

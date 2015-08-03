@@ -1,0 +1,1 @@
+copy /b love.exe+DevIL.dll+OpenAL32.dll+SDL.dll+I.love I.exe

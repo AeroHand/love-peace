@@ -11,8 +11,9 @@ end
 
 function drawI()   --绘制主人公avatar
     --暂时用个方块代替 :P
-
-
+    local ww=love.window.getWidth()
+    local wh=love.window.getHeight()
+    love.graphics.draw(mainchar[maincharfps], ww/2, wh/2, 0, 1, 1, 5, 5, 0, 0)  --need to rescale in the future to make this part robust
 end
 
 function drawUI()  --绘制游戏内UI入口
@@ -64,4 +65,15 @@ function gamecheck()
     if love.keyboard.isDown('d') then
         dxworld=dxworld+1
     end
+    maincharfps=maincharfps+1
+    if maincharfps>24 then 
+        maincharfps=1
+    end    
+end    
+
+
+function preloadimage(imagefile,imagenumber,temptable)
+    for i=1,imagenumber do
+        temptable[i] = love.graphics.newImage(imagefile..tostring(i)..".png")
+    end    
 end    
