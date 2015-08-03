@@ -1,1 +1,2 @@
-ToadEnter your name:sdasdf
+Toad
+Enter your name:asd

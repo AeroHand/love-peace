@@ -4,7 +4,7 @@ function drawworld()--绘制世界
 
     for i=1,15 do
        for j=1,15 do
-        love.graphics.draw(tiletexture, (i-1)*300, (j-1)*300, 0, 1, 1, 5, 5, 0, 0)  --need to rescale in the future to make this part robust
+        love.graphics.draw(tiletexture, (i-1)*300-4*dxworld, (j-1)*300-4*dyworld, 0, 1, 1, 5, 5, 0, 0)  --need to rescale in the future to make this part robust
        end
     end 
 end
@@ -46,3 +46,22 @@ function drawgame()
 	drawUI()
 	drawI()
 end
+
+function animation()
+    
+end    
+
+function gamecheck()
+    if love.keyboard.isDown('w') then
+        dyworld=dyworld-1
+    end
+    if love.keyboard.isDown('a') then
+        dxworld=dxworld-1
+    end
+    if love.keyboard.isDown('s') then
+        dyworld=dyworld+1
+    end
+    if love.keyboard.isDown('d') then
+        dxworld=dxworld+1
+    end
+end    

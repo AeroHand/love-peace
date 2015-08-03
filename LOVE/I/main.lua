@@ -25,9 +25,12 @@ function love.draw()--逐帧绘制
 end
 
 function love.update(dt)--游戏主逻辑
-
+    if curstate=="game" then
+       gamecheck()
+    end   
 end
 
 function love.keypressed(key)--按键响应
-    menucheck(key)       
+    menucheck(key)
+    
 end

@@ -138,6 +138,7 @@ function menucheck(key)
                 end
                 if menunewpointer==1 and alreadyentername==1 then
                     newfile()
+                    love.keyboard.setKeyRepeat(true)
                     curstate="game"
                 end
                 if menunewpointer==2 then
@@ -197,7 +198,7 @@ function menucheck(key)
     end        
 end	
 
-function love.keypressed(key)
+function love.keypressed(key)   --谜之失效了
     if key == "backspace" then
         -- get the byte offset to the last UTF-8 character in the string.
         local byteoffset = utf8.offset(text, -1)
