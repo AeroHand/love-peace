@@ -78,8 +78,10 @@ function drawgameload()
         
         love.graphics.rectangle("line", i*200-150, j*250+100, 100, 200)
         love.graphics.print("save "..tonumber(countfile),i*200-150,j*250+100)
-        --love.graphics.print(filetoload[countfile][1],i*200,j*100)
-        --love.graphics.print(filetoload[countfile][2],i*200,j*100)
+        if filetoload[countfile][1] then
+          love.graphics.print(filetoload[countfile][1],i*200-150,j*250+120)
+          love.graphics.print(filetoload[countfile][2],i*200-150,j*250+140)
+        end  
       end
     end                                                                                           
 end    
@@ -235,7 +237,7 @@ function newfile()
         
         local file = assert(io.open("sav\\save"..tostring(data)..".txt","w"))
         --新建一个存档
-        file:write("Toad")
+        file:write("Toad\n")
         file:write(text)
         file:close()
       end
@@ -248,7 +250,7 @@ function preloadfile()
     file:close()
 
     
-    for i=1,savenum do
+    for i=1,savenum,1 do
        local file = assert(io.open("sav\\save"..tostring(i)..".txt","r"))
        filetoload[i]={}
        local data = file:read("*line"); 
@@ -257,10 +259,10 @@ function preloadfile()
        filetoload[i][2]=line  --custom name
     end   
 
-    for i=savenum+1,8 do
+    for i=savenum+1,8,1 do
        filetoload[i]={}
        filetoload[i][1]="No Save Found"  --character name
-       filetoload[i][2]="Untitled" 
+       filetoload[i][2]="" 
     end   
 
 end
