@@ -63,11 +63,25 @@ function drawgamenew()
        love.graphics.setColor(123, 244, 223) 
        love.graphics.print(text,100,240)
     end    
-
+    
 end
 
 function drawgameload()
-                                                                                               
+    for i=1,4 do
+      for j=0,1 do
+        local countfile=j*4+i  
+        if countfile==menuloadpointer then
+            love.graphics.setColor(123, 244, 223)
+        else
+            love.graphics.setColor(230, 44, 123)
+        end
+        
+        love.graphics.rectangle("line", i*200-150, j*250+100, 100, 200)
+        love.graphics.print("save "..tonumber(countfile),i*200-150,j*250+100)
+        --love.graphics.print(filetoload[countfile][1],i*200,j*100)
+        --love.graphics.print(filetoload[countfile][2],i*200,j*100)
+      end
+    end                                                                                           
 end    
 
 function menucheck(key)
@@ -82,9 +96,12 @@ function menucheck(key)
         if key=="return" or key==" " then
             if menupointer==1 then
                 alreadyentername=0
+                menunewpointer=1
                 curstate="game_new"
             end
             if menupointer==2 then
+                menuloadpointer=1
+                preloadfile()
                 curstate="game_load"
             end
             if menupointer==3 then
@@ -118,6 +135,7 @@ function menucheck(key)
 
                 end
                 if menunewpointer==1 and alreadyentername==1 then
+                    newfile()
                     curstate="game"
                 end
                 if menunewpointer==2 then
@@ -131,6 +149,48 @@ function menucheck(key)
              if menunewpointer>2 then
                 menunewpointer=1
              end
+        else
+            if  curstate=="game_load" then
+                if key=="left" then
+                    menuloadpointer=menuloadpointer-1
+
+                     if menuloadpointer==0 then
+                        menuloadpointer=4
+                     end
+
+                     if menuloadpointer==4 then
+                        menuloadpointer=8
+                     end
+
+                end
+                if key=="right" then
+                    menuloadpointer=menuloadpointer+1
+                     if menuloadpointer==5 then
+                        menuloadpointer=1
+                     end
+
+                     if menuloadpointer==9 then
+                        menuloadpointer=5
+                     end
+                end
+
+               
+                
+                if key=="up" then
+                    menuloadpointer=menuloadpointer-4
+                end
+                if key=="down" then
+                    menuloadpointer=menuloadpointer+4
+                end
+
+                if menuloadpointer<1 then
+                    menuloadpointer=menuloadpointer+8
+                end
+                
+                if menuloadpointer>8 then
+                    menuloadpointer=menuloadpointer-8
+                end        
+            end    
         end
     end        
 end	
@@ -156,3 +216,55 @@ function love.textinput(t)
     text = text .. t
     alreadyentername=1
 end
+
+function newfile()
+
+      local file = assert(io.open("sav\\gameinfo.txt","r"))
+      local data = file:read("*a"); -- 读取所有内容
+      data=tonumber(data)+1
+      file:close()
+      
+      if data>8 then
+         --存档过多！
+         
+      else
+        local file = assert(io.open("sav\\gameinfo.txt","w+"))
+        file:write(data)
+        --file:write("successfully load")
+        file:close()
+        
+        local file = assert(io.open("sav\\save"..tostring(data)..".txt","w"))
+        --新建一个存档
+        file:write("Toad")
+        file:write(text)
+        file:close()
+      end
+end
+
+function preloadfile()
+    local file = assert(io.open("sav\\gameinfo.txt","r"))
+    local data = file:read("*a"); -- 读取所有内容
+    savenum=tonumber(data)
+    file:close()
+
+    
+    for i=1,savenum do
+       local file = assert(io.open("sav\\save"..tostring(i)..".txt","r"))
+       filetoload[i]={}
+       local data = file:read("*line"); 
+       filetoload[i][1]=line  --character name
+       local data = file:read("*line"); 
+       filetoload[i][2]=line  --custom name
+    end   
+
+    for i=savenum+1,8 do
+       filetoload[i]={}
+       filetoload[i][1]="No Save Found"  --character name
+       filetoload[i][2]="Untitled" 
+    end   
+
+end
+
+function readfile()
+
+end    

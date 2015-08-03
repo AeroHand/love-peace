@@ -6,4 +6,5 @@ function initeverything()
   textshow="Please name yourself: "
   love.keyboard.setKeyRepeat(true)
   utf8 = require("utf8")
+  filetoload={}
 end	
