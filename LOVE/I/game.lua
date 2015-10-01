@@ -13,7 +13,17 @@ function drawI()   --绘制主人公avatar
     --暂时用个方块代替 :P
     local ww=love.window.getWidth()
     local wh=love.window.getHeight()
-    love.graphics.draw(mainchar[maincharfps], ww/2, wh/2, 0, 1, 1, 5, 5, 0, 0)  --need to rescale in the future to make this part robust
+    local bodytimer=(maincharfps-12)/12*100
+    love.graphics.draw(f_now, ww/2, wh/2+bodytimer/100, 0 , 0.25, 0.25, 250, 100, 0, 0)
+    love.graphics.draw(body_now, ww/2, wh/2+bodytimer/100, 0 , 0.25, 0.25, 250, 100, 0, 0)
+
+    love.graphics.draw(lh_now, ww/2, wh/2+bodytimer/100, 0 , 0.25, 0.25, 250, 100, 0, 0)
+    love.graphics.draw(rh_now, ww/2, wh/2+bodytimer/100, 0 , 0.25, 0.25, 250, 100, 0, 0)
+
+    love.graphics.draw(head_now, ww/2, wh/2, bodytimer/600 , 0.25, 0.25, 250, 100, 0, 0)
+
+    
+    --love.graphics.draw(mainchar[maincharfps], ww/2, wh/2, 0, 1, 1, 5, 5, 0, 0)  --need to rescale in the future to make this part robust
 end
 
 function drawUI()  --绘制游戏内UI入口
@@ -72,30 +82,43 @@ function gamecheck()
         changebullet(0,1)
     end
     
-    shotup=0
-    shotleft=0
-    if love.keyboard.isDown('up') then
-        shotleft=-1
-    end    
-    if love.keyboard.isDown('down') then
-        shotleft=1
-    end  
-    if love.keyboard.isDown('left') then
-        shotup=-1
-    end  
-    if love.keyboard.isDown('right') then
-        shotup=1
+    --open body menu
+    if love.keyboard.isDown('t') then
+        curstate="bodymanu"
     end
 
-    createbullet(shotup,shotleft)  
-
-    for i=1,bulletnum do
-       bullet[i][1]=bullet[i][1]+bullet[i][3]
-       bullet[i][2]=bullet[i][2]+bullet[i][4]
-       --处理每个子弹逻辑
+    --open organ menu
+    if love.keyboard.isDown('y') then
+        curstate="organmanu"
     end
+    
+    if body[1] then
+        shotup=0
+        shotleft=0
+        if love.keyboard.isDown('up') then
+            shotleft=-1
+        end    
+        if love.keyboard.isDown('down') then
+            shotleft=1
+        end  
+        if love.keyboard.isDown('left') then
+            shotup=-1
+        end  
+        if love.keyboard.isDown('right') then
+            shotup=1
+        end
+
+        if maincharfps%3==0 then
+            createbullet(shotup,shotleft)  
+        end
+        
+        for i=1,bulletnum do
+            bullet[i][1]=bullet[i][1]+bullet[i][3]
+            bullet[i][2]=bullet[i][2]+bullet[i][4]
+            --处理每个子弹逻辑
+        end
        
-
+    end
     maincharfps=maincharfps+1
     if maincharfps>24 then 
         maincharfps=1

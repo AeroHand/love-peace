@@ -138,7 +138,7 @@ function menucheck(key)
                 end
                 if menunewpointer==1 and alreadyentername==1 then
                     newfile()
-                    preloadimage("assets/monsters/slum/",24,mainchar)
+                    
                     curstate="game"
                 end
                 if menunewpointer==2 then
@@ -154,6 +154,11 @@ function menucheck(key)
              end
         else
             if  curstate=="game_load" then
+
+                if key=="return" then
+                  curstate="game"
+                end
+
                 if key=="left" then
                     menuloadpointer=menuloadpointer-1
 
